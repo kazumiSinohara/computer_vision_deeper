@@ -1,0 +1,22 @@
+Description:
+
+First thing I did was to load the test and train images on ot google colab,
+I got the csv with the ground truth, encoded the labels using scikit-learn into integers then encoded into numpy arrays using keras.
+
+Then I trained the CIFAR10 model using 6 epochs and no data augmentation.
+
+Using the trained model, I applied it to the test images and got the respective prediction in string format (using the inverse transformation
+from the sckit-learn label encoder). With that information I built a pandas dataframe with the name of the image and its predicted label.
+
+Finally, I built a dictionary linking each possible label to a function which would rotate and correct the orientation of the images,
+together with the dataframe containing the predicted label I was able to correct the test image orientation.
+
+The very last step was to concatenate the corrected test images and the corrected train images in a numpy array.
+
+
+Improviments:
+
+The test accuracy of this model was above 98%, so I wouldnt change the model itself but I would try and improve on how
+the data is being fed to the model. Instead of loading all the train data upfront to the memory it would be better
+to have the system take small batches from the hard disk. Because it could be the case that this data wouldnt fit in memory
+then we would run into trouble.
